@@ -1,0 +1,24 @@
+﻿function CalcularValorDescontoTotalDoProduto()
+{
+  // Abertura da aplicação 
+  TestedApps.Orders.Run();
+  
+  //Acesso ao formulario de Orders
+  Aliases.Orders.MainForm.MainMenu.Click("Orders|New order...");
+  
+  // Seleção do tipo produto e preenchemos a quantidade
+  Aliases.Orders.OrderForm.Group.ProductNames.ClickItem("ScreenSaver");
+  //Aliases.Orders.OrderForm.Group.Quantity.UpDownEdit.DblClick(21, 8);
+  Aliases.Orders.OrderForm.Group.Quantity.wValue = 10;
+  //Aliases.Orders.OrderForm.Group.Click(199, 77);
+  Aliases.Orders.OrderForm.Group.Price.Click(31, 8);
+  Aliases.Orders.OrderForm.Group.Quantity.UpDownEdit.Click(22, 7);
+  aqObject.CheckProperty(Aliases.Orders.OrderForm.Group.groupBox1.Total, "wText", cmpEqual, "180");
+  Aliases.Orders.OrderForm.Group.Price.Click(44, 6);
+  aqObject.CheckProperty(Aliases.Orders.OrderForm.Group.Price, "wText", cmpEqual, "$20");
+  Aliases.Orders.OrderForm.Group.Discount.Click(49, 12);
+  aqObject.CheckProperty(Aliases.Orders.OrderForm.Group.Discount, "wText", cmpEqual, "10%");
+  aqObject.CheckProperty(Aliases.Orders.OrderForm.Group.groupBox1.Total, "wText", cmpEqual, "180");
+  Aliases.Orders.OrderForm.ButtonCancel.ClickButton();
+  Aliases.Orders.MainForm.Close();
+}
